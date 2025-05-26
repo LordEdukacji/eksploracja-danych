@@ -1,0 +1,2 @@
+# eksploracja-danych
+eksploruję dane
