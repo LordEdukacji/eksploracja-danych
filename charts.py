@@ -47,17 +47,21 @@ def gender_hist(df):
     "woman"
     ]
 
+    rejected_terms = ["Nah", "All", "ostensibly male, unsure what that really means", "p", "Neuter", "A little about you"]
+
     def normalize_gender(row):
         if row["Gender"] in male_terms:
             return "Male"
         elif row["Gender"] in female_terms:
             return "Female"
+        elif row["Gender"] in rejected_terms:
+            return None
         else:
             return "Other"
 
     df["gender_normalized"] = df.apply(normalize_gender, axis=1)
 
-    plt.hist(df.gender_normalized)
+    pd.Series(df.gender_normalized).value_counts(sort=False).plot(kind='bar')
 
     plt.ylabel("Liczba próbek")
     plt.title("Histogram znormalizowanego atrybutu Gender")
