@@ -2,6 +2,7 @@ import inspect
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from numericize import *
 
 def age_hist(df):
     plt.clf()
@@ -12,6 +13,14 @@ def age_hist(df):
     plt.title("Histogram atrybutu Age")
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
+
+    def limit_age(row):
+        if row["Age"] < 18 or row["Age"] > 100:
+            return None
+        else:
+            return  row["Age"]
+        
+    df["_age"] = df.apply(limit_age, axis=1)
 
 def gender_hist(df):
     plt.clf()
@@ -68,6 +77,8 @@ def gender_hist(df):
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
 
+    df["_gender"] = df.apply(numericize_gender, axis=1)
+
 def country_hist(df):
     plt.clf()
 
@@ -99,6 +110,8 @@ def self_employed_hist(df):
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
 
+    df["_self_employed"] = df.apply(numericize_yes_no, attribute="self_employed", axis=1)
+
 def family_history_hist(df):
     plt.clf()
 
@@ -108,6 +121,8 @@ def family_history_hist(df):
     plt.title("Histogram atrybutu family_history")
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
+
+    df["_family_history"] = df.apply(numericize_yes_no, attribute="family_history", axis=1)
 
 def treatment_hist(df):
     plt.clf()
@@ -119,6 +134,8 @@ def treatment_hist(df):
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
 
+    df["_treatment"] = df.apply(numericize_yes_no, attribute="treatment", axis=1)
+
 def work_interfere_hist(df):
     plt.clf()
 
@@ -128,6 +145,8 @@ def work_interfere_hist(df):
     plt.title("Histogram atrybutu work_interfere")
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
+
+    df["_work_interfere"] = df.apply(numericize_frequency, attribute="work_interfere", axis=1)
 
 def no_employees_hist(df):
     plt.clf()
@@ -139,6 +158,8 @@ def no_employees_hist(df):
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
 
+    df["_no_employees"] = df.apply(numericize_no_employees, attribute="no_employees", axis=1)
+
 def remote_work_hist(df):
     plt.clf()
 
@@ -148,6 +169,8 @@ def remote_work_hist(df):
     plt.title("Histogram atrybutu remote_work")
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
+
+    df["_remote_work"] = df.apply(numericize_yes_no, attribute="remote_work", axis=1)
 
 def tech_company_hist(df):
     plt.clf()
@@ -159,6 +182,8 @@ def tech_company_hist(df):
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
 
+    df["_tech_company"] = df.apply(numericize_yes_no, attribute="tech_company", axis=1)
+
 def benefits_hist(df):
     plt.clf()
 
@@ -168,6 +193,8 @@ def benefits_hist(df):
     plt.title("Histogram atrybutu benefits")
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
+
+    df["_benefits"] = df.apply(numericize_yes_no, attribute="benefits", axis=1)
 
 def care_options_hist(df):
     plt.clf()
@@ -179,6 +206,8 @@ def care_options_hist(df):
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
 
+    df["_care_options"] = df.apply(numericize_yes_no, attribute="care_options", axis=1)
+
 def wellness_program_hist(df):
     plt.clf()
 
@@ -189,6 +218,8 @@ def wellness_program_hist(df):
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
 
+    df["_wellness_program"] = df.apply(numericize_yes_no, attribute="wellness_program", axis=1)
+
 def seek_help_hist(df):
     plt.clf()
 
@@ -198,6 +229,8 @@ def seek_help_hist(df):
     plt.title("Histogram atrybutu seek_help")
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
+    
+    df["_seek_help"] = df.apply(numericize_yes_no, attribute="seek_help", axis=1)
 
 def anonymity_hist(df):
     plt.clf()
@@ -209,6 +242,8 @@ def anonymity_hist(df):
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
 
+    df["_anonymity"] = df.apply(numericize_yes_no, attribute="anonymity", axis=1)
+
 def leave_hist(df):
     plt.clf()
 
@@ -218,6 +253,8 @@ def leave_hist(df):
     plt.title("Histogram atrybutu leave")
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
+
+    df["_leave"] = df.apply(numericize_difficulty, attribute="leave", axis=1)
 
 def mental_health_consequence_hist(df):
     plt.clf()
@@ -229,6 +266,8 @@ def mental_health_consequence_hist(df):
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
 
+    df["_mental_health_consequence"] = df.apply(numericize_yes_no, attribute="mental_health_consequence", axis=1)
+
 def phys_health_consequence_hist(df):
     plt.clf()
 
@@ -238,6 +277,8 @@ def phys_health_consequence_hist(df):
     plt.title("Histogram atrybutu phys_health_consequence")
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
+
+    df["_phys_health_consequence"] = df.apply(numericize_yes_no, attribute="phys_health_consequence", axis=1)
 
 def coworkers_hist(df):
     plt.clf()
@@ -249,6 +290,8 @@ def coworkers_hist(df):
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
 
+    df["_coworkers"] = df.apply(numericize_yes_no, attribute="coworkers", axis=1)
+
 def supervisor_hist(df):
     plt.clf()
 
@@ -258,6 +301,8 @@ def supervisor_hist(df):
     plt.title("Histogram atrybutu supervisor")
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
+
+    df["_supervisor"] = df.apply(numericize_yes_no, attribute="supervisor", axis=1)
 
 def mental_health_interview_hist(df):
     plt.clf()
@@ -269,6 +314,8 @@ def mental_health_interview_hist(df):
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
 
+    df["_mental_health_interview"] = df.apply(numericize_yes_no, attribute="mental_health_interview", axis=1)
+
 def phys_health_interview_hist(df):
     plt.clf()
 
@@ -278,6 +325,8 @@ def phys_health_interview_hist(df):
     plt.title("Histogram atrybutu phys_health_interview")
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
+
+    df["_phys_health_interview"] = df.apply(numericize_yes_no, attribute="phys_health_interview", axis=1)
 
 def mental_vs_physical_hist(df):
     plt.clf()
@@ -289,6 +338,8 @@ def mental_vs_physical_hist(df):
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
 
+    df["_mental_vs_physical"] = df.apply(numericize_yes_no, attribute="mental_vs_physical", axis=1)
+
 def obs_consequence_hist(df):
     plt.clf()
 
@@ -298,3 +349,5 @@ def obs_consequence_hist(df):
     plt.title("Histogram atrybutu obs_consequence")
 
     plt.savefig("hist/" + inspect.stack()[0][3] + ".png", bbox_inches='tight')
+
+    df["_obs_consequence"] = df.apply(numericize_yes_no, attribute="obs_consequence", axis=1)

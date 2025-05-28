@@ -1,5 +1,6 @@
 import pandas as pd
 import charts
+import matplotlib.pyplot as plt
 
 def main():
     df = pd.read_csv("survey.csv")
@@ -29,6 +30,37 @@ def main():
     charts.phys_health_interview_hist(df)
     charts.mental_vs_physical_hist(df)
     charts.obs_consequence_hist(df)
+
+    df2 = df[[ "_age",
+               "_gender",
+               "_self_employed",
+               "_family_history",
+               "_treatment",
+               "_work_interfere",
+               "_no_employees",
+               "_remote_work",
+               "_tech_company",
+               "_benefits",
+               "_care_options",
+               "_wellness_program",
+               "_seek_help",
+               "_anonymity",
+               "_leave",
+               "_mental_health_consequence",
+               "_phys_health_consequence",
+               "_coworkers",
+               "_supervisor",
+               "_mental_health_interview",
+               "_phys_health_interview",
+               "_mental_vs_physical",
+               "_obs_consequence"
+               ]]
+    
+    print(df2.corr(method="pearson"))
+    
+    plt.clf()
+    plt.matshow(df2.corr(method="pearson"))
+    plt.show()
 
 if __name__ == "__main__":
     main()
