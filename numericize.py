@@ -13,7 +13,7 @@ def numericize_difficulty(row, attribute):
         return 2/3
     elif row[attribute] == "Somewhat easy":
         return 1/3
-    elif row[attribute] == "Very easy":
+    elif row[attribute] == "Very easy": 
         return 0
     else:
         return None

@@ -57,15 +57,20 @@ def main():
                "_obs_consequence"
                ]]
     
-    co = df2.corr(method="pearson")
+    """ co = df2.corr(method="pearson")
     plt.clf()
     sns.heatmap(co)
-    plt.show()
+    plt.title("Macierz korelacji metodą Pearsona")
+    plt.savefig("heatmap.png", bbox_inches='tight') """
+    
+    print(df2.corr(method="pearson"))
 
-    """ co2 = df2.corr(method="spearman")
+    co2 = df2.corrwith(df2["_treatment"])
     plt.clf()
-    sns.heatmap(co2)
-    plt.show() """
+    plt.barh(df2.columns, co2)
+    plt.title("Korelacja metodą Pearsona według atrybutu treatment")
+    plt.savefig("corr.png", bbox_inches='tight')
+    
 
 if __name__ == "__main__":
     main()
