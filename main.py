@@ -1,6 +1,7 @@
 import pandas as pd
 import charts
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 def main():
     df = pd.read_csv("survey.csv")
@@ -56,11 +57,15 @@ def main():
                "_obs_consequence"
                ]]
     
-    print(df2.corr(method="pearson"))
-    
+    co = df2.corr(method="pearson")
     plt.clf()
-    plt.matshow(df2.corr(method="pearson"))
+    sns.heatmap(co)
     plt.show()
+
+    """ co2 = df2.corr(method="spearman")
+    plt.clf()
+    sns.heatmap(co2)
+    plt.show() """
 
 if __name__ == "__main__":
     main()
